@@ -15,6 +15,7 @@ function IndexPopup() {
       style={{
         display: "flex",
         flexDirection: "column",
+        width: 300,
         padding: 16
       }}>
       <a target="_blank" href="https://docs.plasmo.com/framework/env">
