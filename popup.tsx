@@ -18,14 +18,10 @@ function IndexPopup() {
         width: 300,
         padding: 16
       }}>
-      <a target="_blank" href="https://docs.plasmo.com/framework/env">
-        with-env example extension
-      </a>
-      <p>Ship name: {process.env.PLASMO_PUBLIC_SHIP_NAME}</p>
-      <p>Private data: {process.env.INFOPATH}</p>
-
-      <p>{process.env.NODE_ENV}</p>
-      <p>TEST DATA: {data?.url}</p>
+      <h1>Wiser Plus</h1>
+      <p>This extension only supports UMass Boston as of now. I'm working on it to make it possible for other schools (as long as they use Wiser).</p>
+      <span>Made by <a target="_blank" href="https://www.minh.boston/">Minh Nguyen</a> with ❤️
+      </span>
     </div>
   )
 }

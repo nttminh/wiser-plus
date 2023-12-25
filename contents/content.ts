@@ -2,7 +2,7 @@ import { sendToBackground } from "@plasmohq/messaging";
 import type { PlasmoCSConfig } from "plasmo";
 
 export const config: PlasmoCSConfig = {
-  matches: ["https://campus.sa.umasscs.net/psp/csm/EMPLOYEE/*"],
+  // matches: ["https://campus.sa.umasscs.net/psp/csm/EMPLOYEE/*"],
   all_frames: true,
 }
 
