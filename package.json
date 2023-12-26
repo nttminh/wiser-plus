@@ -10,7 +10,10 @@
     "package": "plasmo package"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
     "@mtucourses/rate-my-professors": "^2.2.1",
+    "@mui/material": "^5.15.2",
     "@plasmohq/messaging": "^0.6.0",
     "@plasmohq/selector": "^0.0.5",
     "@plasmohq/storage": "^1.9.0",
