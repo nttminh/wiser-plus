@@ -1,9 +1,13 @@
 import ratings from '@mtucourses/rate-my-professors';
+import SettingsIcon from '@mui/icons-material/Settings';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import { IconButton, Tooltip, Typography } from '@mui/material';
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import logoImage from "data-base64:~assets/icon.png";
 import useDebounce from "hooks/useDebounce";
+import "popup.css";
 import { useEffect, useState } from "react";
-
 interface School {
   city: string;
   id: string;
@@ -127,17 +131,35 @@ function IndexPopup() {
   
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: 300,
-        padding: 16
-      }}>
-      <h1>Wiser Plus</h1>
-      <p>
-        This extension only supports UMass Boston as of now. I'm working on it to make it possible for other schools (as long as they use Wiser).</p>
-              <Autocomplete
+    <div style={{backgroundColor: "#f4f4f4"}}>
+      <section className="title-section" style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '16px', paddingLeft: '16px', paddingRight: '16px'}}>
+          <div className="logo-title" style={{display: 'flex', alignItems: 'center', width: 'fit'}}>
+            <img src={logoImage} alt="WiserPlus logo" style={{width: '24px', height: '24px', marginRight: '2px'}}/>
+            <Typography variant='h5' ><span style={{fontWeight: "bold"}}>Wiser</span>Plus</Typography>
+          </div>
+          <div className="header-info">
+            <Tooltip title="Message Developer">
+              <IconButton color="primary" aria-label='Message Developer' href='https://www.linkedin.com/in/nttminh/' target='_blank' >
+                <SupportAgentIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Settings">
+              <IconButton color="primary" aria-label='Settings'>
+                <SettingsIcon />
+              </IconButton>
+            </Tooltip>
+          </div>
+      </section>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          width: 300,
+          padding: 16
+        }}>
+        <Typography variant='body2' style={{backgroundColor: "white"}} p={1}>
+          This extension only supports UMass Boston as of now. I'm working on it to make it possible for other schools (as long as they use Wiser).</Typography>
+        <Autocomplete
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
@@ -151,16 +173,20 @@ function IndexPopup() {
           sx={{ marginY: 2 }}
           isOptionEqualToValue={(option, value) => option.name === value.name}
           noOptionsText={loading ? 'Loading...' : 'No schools found'}
-          renderInput={(params) => <TextField {...params} label="School" />} />
+          renderInput={(params) => <TextField {...params} label="School" />}
+          style={{backgroundColor: "white"}}
+        />
 
-        <div>
-          <h3>School Information</h3>
-          {/* <p>City: {school?. || ''}</p>
-          <p>State: {school?.state || ''}</p> */}
-        </div>
+          <div style={{backgroundColor: "white", padding: "8px"}}>
+            <Typography variant='h6'>School Information</Typography>
+            <Typography variant='caption' display="block">{value?.name || ''}</Typography>
+            <Typography variant='caption' display="block">City: {value?.city || ''}</Typography>
+            <Typography variant='caption' display="block">State: {value?.state || ''}</Typography>
+          </div>
 
-      <span>Made by <a target="_blank" href="https://www.minh.boston/">Minh Nguyen</a> with ❤️
-      </span>
+        <Typography variant='body2' mt={2}>Made by <a target="_blank" href="https://www.minh.boston/">Minh Nguyen</a> with ❤️
+        </Typography>
+      </div>
     </div>
   )
 }
