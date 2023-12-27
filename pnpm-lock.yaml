@@ -5,6 +5,7 @@ specifiers:
   '@emotion/styled': ^11.11.0
   '@ianvs/prettier-plugin-sort-imports': 4.1.1
   '@mtucourses/rate-my-professors': ^2.2.1
+  '@mui/icons-material': ^5.15.2
   '@mui/material': ^5.15.2
   '@plasmohq/messaging': ^0.6.0
   '@plasmohq/selector': ^0.0.5
@@ -23,6 +24,7 @@ dependencies:
   '@emotion/react': 11.11.3_u5zja476buyywzbvglb2fbhaii
   '@emotion/styled': 11.11.0_dpnxlqmft4usbp3ofivrvv3g5i
   '@mtucourses/rate-my-professors': 2.2.1
+  '@mui/icons-material': 5.15.2_xma3snepgkk6xo4uyevyssv66m
   '@mui/material': 5.15.2_zvfjdv3hwn3ihuequefwrtfz2a
   '@plasmohq/messaging': 0.6.0_react@18.2.0
   '@plasmohq/selector': 0.0.5_react@18.2.0
@@ -845,6 +847,23 @@ packages:
 
   /@mui/core-downloads-tracker/5.15.2:
     resolution: {integrity: sha512-0vk4ckS2w1F5PmkSXSd7F/QuRlNcPqWTJ8CPl+HQRLTIhJVS/VKEI+3dQufOdKfn2wS+ecnvlvXerbugs+xZ8Q==}
+    dev: false
+
+  /@mui/icons-material/5.15.2_xma3snepgkk6xo4uyevyssv66m:
+    resolution: {integrity: sha512-Vs0Z6cd6ieTavMjqPvIJJfwsKaCLdRSErk5LjKdZlBqk7r2SR6roDyhVTQuZOeCzjEFj0qZ4iVPp2DJZRwuYbw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.23.6
+      '@mui/material': 5.15.2_zvfjdv3hwn3ihuequefwrtfz2a
+      '@types/react': 18.2.37
+      react: 18.2.0
     dev: false
 
   /@mui/material/5.15.2_zvfjdv3hwn3ihuequefwrtfz2a:
