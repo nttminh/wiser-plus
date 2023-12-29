@@ -1,6 +1,18 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# Wiser Plus
+Wiser on steroids. See professor ratings right inside Wiser. No need to do extra searching.
+![](https://lh3.googleusercontent.com/egEqhttKmofg2ZR2rRrNEtWQ6A6SAKYWmZSjlxd0X5iupCOgDtv0zrM_VFGcFnn94KTweYGj-g_i-p0w5HKsuySGaXg=s800-w800-h500)
+### How to use
+Click [here](https://chromewebstore.google.com/detail/wiser-plus/ijkpfmlggocjdpcfnhjblklabhgjochl) to go to Chrome Web Store, click "Add to Chrome" button, and register your class on Wiser like usual, you will see the ratings appear.
 
-## Getting Started
+### Feature:
+- View **real-time** professor ratings directly on Wiser course listings
+- Save time by **NOT** having to switch between tabs or apps to check professor reviews
+- Get insights on teaching styles, course difficulty, and more—**all with 1 click**
+- Access **user-generated** content to understand what you're getting into before you register
+- Benefit from an intuitive, user-friendly interface designed **for students, by students**
+- Get **quick support** and answers from the Wiser Plus team
+
+### Getting Started
 
 First, run the development server:
 
@@ -12,11 +24,7 @@ npm run dev
 
 Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
-
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
-
-## Making production build
+### Making production build
 
 Run the following:
 
@@ -28,6 +36,6 @@ npm run build
 
 This should create a production bundle for your extension, ready to be zipped and published to the stores.
 
-## Submit to the webstores
-
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+### You have suggestions?
+Feel free to message me through discord: minhngwen
+or LinkedIn: https://www.linkedin.com/in/nttminh/
