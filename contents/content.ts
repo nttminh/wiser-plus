@@ -92,6 +92,41 @@ function updateMultipleInstructorNames(span, metaData) {
   });
 }
 
+
+
+function updateMultipleInstructorNames(span, metaData) {
+  // Clear the span
+  span.innerHTML = "";
+
+  metaData.forEach((data, index) => {
+    // Create a text node for the instructor's name and append it
+    let name = document.createTextNode(data.firstName + " " + data.lastName);
+    span.appendChild(name);
+
+    // Create a link (anchor) element
+    let anchor = document.createElement("a");
+    anchor.className = "rate-my-professor-link";
+    anchor.target = "_blank";
+
+    // Set text content and href based on whether legacyId is available
+    if (data.legacyId === null) {
+      anchor.textContent = " ?/5";
+      anchor.href = "https://www.ratemyprofessors.com/search/professors?q=" + encodeURIComponent(data.firstName) + "%20" + encodeURIComponent(data.lastName);
+    } else {
+      anchor.textContent = " " + data.avgRating.toString() + "/5";
+      anchor.href = "https://www.ratemyprofessors.com/professor/" + data.legacyId.toString();
+    }
+
+    // Append the anchor
+    span.appendChild(anchor);
+
+    // If it's not the last item, append a comma and space
+    if (index < metaData.length - 1) {
+      span.appendChild(document.createTextNode(", "));
+    }
+  });
+}
+
 function modernViewDOMHandler() {
   const iframe = document.getElementById('ptifrmtgtframe') as HTMLIFrameElement;
   if (iframe) {
