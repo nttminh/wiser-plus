@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import logoImage from "data-base64:~assets/icon.png";
 import useDebounce from "hooks/useDebounce";
 import "popup.css";
+import React from 'react';
 import { useEffect, useState } from "react";
 interface School {
   city: string;
@@ -184,7 +185,7 @@ function IndexPopup() {
             <Typography variant='caption' display="block">State: {value?.state || ''}</Typography>
           </div>
 
-        <Typography variant='body2' mt={2}>Made by <a target="_blank" href="https://www.minh.boston/">Minh Nguyen</a> with ❤️
+        <Typography variant='body2' mt={2}>Made by <a target="_blank" href="https://www.minh.boston/">Minh Nguyen</a> and <a target="_blank" href="https://www.lorenzoorio.com/">Lorenzo Orio</a> with ❤️
         </Typography>
       </div>
     </div>
