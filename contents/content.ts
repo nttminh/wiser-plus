@@ -7,13 +7,13 @@ export const config: PlasmoCSConfig = {
   all_frames: true
 }
 
-function updateMultipleInstructorNames(span, metaData) {
+function updateAndAddRatings(span, metaData) {
   // Clear the span
   span.innerHTML = ""
 
   metaData.forEach((data, index) => {
     // Create a text node for the instructor's name and append it
-    let name = document.createTextNode(data.firstName + " " + data.lastName)
+    let name = document.createTextNode(data.firstName || "" + " " + data.lastName || "")
     span.appendChild(name)
 
     // Create a link (anchor) element
@@ -56,7 +56,10 @@ function modernViewDOMHandler() {
         if (span.innerText === "To be Announced") {
           return true // true to bypass the warning
         }
+
+        // Create an array to store the results for instructors
         const multiRes = []
+
         // If the name contains a comma, it's a list of instructors
         if (span.innerText.includes(",")) {
           const instructorNames = span.innerText.split(",\n")
@@ -83,12 +86,12 @@ function modernViewDOMHandler() {
             multiRes.push(res)
           }
           // console.log(multiRes);
-          updateMultipleInstructorNames(span, multiRes)
+          updateAndAddRatings(span, multiRes)
           return multiRes
         }
 
         // For a single professor
-        const res = await sendToBackground({
+        let res = await sendToBackground({
           name: "getTeacher",
           body: {
             teacherName: span.innerText,
@@ -96,8 +99,16 @@ function modernViewDOMHandler() {
           },
           extensionId: process.env.PLASMO_PUBLIC_EXTENSION_ID
         })
+        if (res === null) {
+          res = {
+            avgRating: null,
+            legacyId: null,
+            firstName: span.innerText,
+            lastName: null
+          }
+        }
         multiRes.push(res)
-        updateMultipleInstructorNames(span, multiRes)
+        updateAndAddRatings(span, multiRes)
         return multiRes
       })
   }
@@ -140,7 +151,7 @@ function classicViewDOMHandler() {
         multiRes.push(res)
       }
       // console.log(multiRes);
-      updateMultipleInstructorNames(span, multiRes)
+      updateAndAddRatings(span, multiRes)
       return multiRes
     }
 
@@ -155,7 +166,7 @@ function classicViewDOMHandler() {
 
     // single instructor
     multiRes.push(res)
-    updateMultipleInstructorNames(span, multiRes)
+    updateAndAddRatings(span, multiRes)
     return multiRes
   })
 }
