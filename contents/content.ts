@@ -1,32 +1,10 @@
-import type { PlasmoCSConfig } from "plasmo"
+import type { PlasmoCSConfig } from "plasmo";
 
-import { sendToBackground } from "@plasmohq/messaging"
+import { sendToBackground } from "@plasmohq/messaging";
 
 export const config: PlasmoCSConfig = {
   // matches: ["https://campus.sa.umasscs.net/psp/csm/EMPLOYEE/*"],
   all_frames: true
-}
-
-function updateInstructorNames(span, metaData) {
-  let anchor = document.createElement("a")
-  anchor.className = "rate-my-professor-link"
-  anchor.target = "_blank"
-  if (metaData === null || metaData.avgRating === 0) {
-    anchor.textContent = "Rate Professor!"
-    anchor.href =
-      "https://www.ratemyprofessors.com/search/professors?q=" +
-      span.innerText.replace(" ", "%20")
-  } else {
-    anchor.textContent = metaData.avgRating.toString() + "/5"
-    anchor.href =
-      "https://www.ratemyprofessors.com/professor/" +
-      metaData.legacyId.toString()
-  }
-
-  let space = document.createTextNode(" ")
-
-  span.appendChild(space)
-  span.appendChild(anchor)
 }
 
 function updateMultipleInstructorNames(span, metaData) {
@@ -44,8 +22,8 @@ function updateMultipleInstructorNames(span, metaData) {
     anchor.target = "_blank"
 
     // Set text content and href based on whether legacyId is available
-    if (data.legacyId === null) {
-      anchor.textContent = " ?/5"
+    if (data.legacyId === null || data.avgRating === 0) {
+      anchor.textContent = " Rate Professor!"
       anchor.href =
         "https://www.ratemyprofessors.com/search/professors?q=" +
         encodeURIComponent(data.firstName) +
@@ -73,18 +51,15 @@ function modernViewDOMHandler() {
     const iframeDocument =
       iframe.contentDocument || iframe.contentWindow.document
     // fix the above line
-    iframeDocument
-      .querySelectorAll('span[id^="MTG_INSTR$"]')
-      .forEach(async function (span: HTMLSpanElement) {
+    iframeDocument.querySelectorAll('span[id^="MTG_INSTR$"]').forEach(async function (span: HTMLSpanElement) {
         // Skip iteration if the instructor name is "To Be Announced"
         if (span.innerText === "To be Announced") {
           return true // true to bypass the warning
         }
-
+        const multiRes = []
         // If the name contains a comma, it's a list of instructors
         if (span.innerText.includes(",")) {
           const instructorNames = span.innerText.split(",\n")
-          const multiRes = []
           for (const instructorName of instructorNames) {
             let res = await sendToBackground({
               name: "getTeacher",
@@ -112,6 +87,7 @@ function modernViewDOMHandler() {
           return multiRes
         }
 
+        // For a single professor
         const res = await sendToBackground({
           name: "getTeacher",
           body: {
@@ -120,8 +96,9 @@ function modernViewDOMHandler() {
           },
           extensionId: process.env.PLASMO_PUBLIC_EXTENSION_ID
         })
-        updateInstructorNames(span, res)
-        return res
+        multiRes.push(res)
+        updateMultipleInstructorNames(span, multiRes)
+        return multiRes
       })
   }
 }
@@ -140,10 +117,9 @@ function classicViewDOMHandler() {
     if (span.innerText === "To be Announced") {
       return true
     }
-
+    const multiRes = []
     if (span.innerText.includes(",")) {
       const instructorNames = span.innerText.split(",\n")
-      const multiRes = []
       for (const instructorName of instructorNames) {
         let res = await sendToBackground({
           name: "getTeacher",
@@ -176,8 +152,11 @@ function classicViewDOMHandler() {
       },
       extensionId: process.env.PLASMO_PUBLIC_EXTENSION_ID
     })
-    updateInstructorNames(span, res)
-    return res
+
+    // single instructor
+    multiRes.push(res)
+    updateMultipleInstructorNames(span, multiRes)
+    return multiRes
   })
 }
 
