@@ -7,7 +7,7 @@ export const BuyMeACoffee = () => {
     //   <img src={CoffeImg} style={{ width: "17px" }} />
     // </a>
     <a href="https://www.buymeacoffee.com/wiserplus" target="_blank">
-      <img src="https://img.buymeacoffee.com/button-api/?text=coffee&emoji=&slug=wiserplus&button_colour=5F7FFF&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00" 
+      <img src="https://img.buymeacoffee.com/button-api/?text=Coffee&emoji=&slug=wiserplus&button_colour=5F7FFF&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00" 
      style={{ width: "120px" }}/>
     </a>
   );
