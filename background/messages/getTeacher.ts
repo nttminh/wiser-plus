@@ -1,6 +1,7 @@
-import ratings from "@mtucourses/rate-my-professors";
+
 import type { PlasmoMessaging } from "@plasmohq/messaging";
 import { SecureStorage } from "@plasmohq/storage/secure";
+import ratings from "../../services/index";
 const storage = new SecureStorage({
     copiedKeyList: ["shield-modulation"]
 })
@@ -28,8 +29,6 @@ export type ResponseBody = {
     school:                School;
     wouldTakeAgainPercent?: number;
 }
-
-
 
 const handler: PlasmoMessaging.MessageHandler<
     RequestBody,
