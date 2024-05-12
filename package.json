@@ -1,7 +1,7 @@
 {
   "name": "wiser-plus",
   "displayName": "Wiser Plus",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Wiser on steroids. See professor ratings right inside Wiser. No need to do extra searching.",
   "author": "Minh Nguyen <https://www.minh.boston/>",
   "scripts": {
