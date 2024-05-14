@@ -1,5 +1,4 @@
 import type { PlasmoCSConfig } from "plasmo";
-
 import { sendToBackground } from "@plasmohq/messaging";
 
 export const config: PlasmoCSConfig = {
@@ -29,13 +28,13 @@ function getInstructorsSpans(): HTMLSpanElement[] {
   if (!iframe) {
     console.error("No iframe found");
     return
-  };  // Exit if no iframe found
+  }  // Exit if no iframe found
 
   const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
   if (!iframeDocument) {
     console.error("No document found in iframe");
     return
-  };  // Exit if no document found in iframe
+  }  // Exit if no document found in iframe
 
   const spans = iframeDocument.querySelectorAll<HTMLSpanElement>('span[id^="MTG_INSTR$"]');
 
@@ -205,7 +204,7 @@ function modernViewDOMHandler() {
   });
 
   const fetchPromises = Array.from(instructors).map(async instructorName => {
-    const res = await sendToBackground({
+    return await sendToBackground({
       name: "getTeacher",
       body: {
         teacherName: instructorName,
@@ -213,8 +212,6 @@ function modernViewDOMHandler() {
       },
       extensionId: process.env.PLASMO_PUBLIC_EXTENSION_ID
     });
-
-    return res;
   });
 
   Promise.all(fetchPromises).then(results => {
@@ -247,7 +244,7 @@ function classicViewDOMHandler() {
   });
 
   const fetchPromises = Array.from(instructors).map(async instructorName => {
-    const res = await sendToBackground({
+    return await sendToBackground({
       name: "getTeacher",
       body: {
         teacherName: instructorName,
@@ -255,8 +252,6 @@ function classicViewDOMHandler() {
       },
       extensionId: process.env.PLASMO_PUBLIC_EXTENSION_ID
     });
-
-    return res;
   });
 
   Promise.all(fetchPromises).then(results => {
@@ -265,7 +260,7 @@ function classicViewDOMHandler() {
   });
 }
 
-const observer = new MutationObserver((mutations, observer) => {
+const observer = new MutationObserver((mutations) => {
   for (const mutation of mutations) {
     if (mutation.type === "attributes") {
       const targetElement = mutation.target as HTMLElement
@@ -280,8 +275,6 @@ const observer = new MutationObserver((mutations, observer) => {
 
       if (document.head.querySelector("title").innerText === "Class Search") {
         classicViewDOMHandler()
-        // console.log("Title detected");
-        continue
       }
     }
   }

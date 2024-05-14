@@ -1,7 +1,7 @@
 {
   "name": "wiser-plus",
   "displayName": "Wiser Plus",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Wiser on steroids. See professor ratings right inside Wiser. No need to do extra searching.",
   "author": "Minh Nguyen <https://www.minh.boston/>",
   "scripts": {
@@ -18,6 +18,7 @@
     "@plasmohq/messaging": "^0.6.0",
     "@plasmohq/selector": "^0.0.5",
     "@plasmohq/storage": "^1.9.0",
+    "darkmode-js": "^1.5.7",
     "graphql": "^16.8.1",
     "graphql-request": "^5.1.0",
     "isomorphic-fetch": "^3.0.0",
